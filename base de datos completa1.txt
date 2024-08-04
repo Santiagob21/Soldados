@@ -1,0 +1,96 @@
+-- Active: 1722712047896@@127.0.0.1@3306
+CREATE DATABASE base1
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+USE base1;
+
+CREATE TABLE soldado(
+    id_solda INT(5) AUTO_INCREMENT PRIMARY KEY,
+    nombre_solda VARCHAR(20),
+    grado_solda VARCHAR(20),
+    codigo_solda VARCHAR(20)
+)
+
+CREATE TABLE compañia(
+    id_compa INT(10) AUTO_INCREMENT PRIMARY KEY,
+    numero_compa INT(10),
+    actividades_compa VARCHAR(10)
+)
+
+CREATE TABLE cuarteles(
+    id_cuartel INT(10)  AUTO_INCREMENT PRIMARY KEY,
+    nombre_cuartel VARCHAR(20),
+    ubicacion_cuartel VARCHAR(20),
+    codigo_cuartel INT(20)
+)
+
+CREATE TABLE cuerpoejer(
+    id_cuerpo INT(10) AUTO_INCREMENT PRIMARY KEY,
+    infanteria_cuerpo VARCHAR(20),
+    artilleria_cuerpo VARCHAR(20),
+    armeria_cuerpo VARCHAR(20)
+)
+
+CREATE TABLE servicio(
+    id_servi INT(10) AUTO_INCREMENT PRIMARY KEY,
+    guardia_servi VARCHAR(20),
+    cuartelero_servi VARCHAR(20)
+)
+
+CREATE TABLE soldado_servicio(
+    id_solda INT(10),
+    id_servi INT(10)
+)
+
+CREATE TABLE compañia_cuarteles(
+    id_compa INT(10),
+    id_cuartel INT(10)
+)
+
+
+ALTER TABLE soldado ADD id_cuartel2 INT(10);
+
+ALTER TABLE soldado add constraint fk_id1 FOREIGN KEY (id_cuartel2) REFERENCES cuarteles (id_cuartel);
+
+ALTER TABLE compañia ADD id_solda2 INT(10);
+
+alter TABLE compañia add constraint fk_id2 FOREIGN KEY (id_solda2) REFERENCES soldado (id_solda);
+
+ALTER TABLE soldado add id_cuerpo3 INT(10);
+
+ALTER TABLE soldado add constraint fk_id3 FOREIGN KEY (id_cuerpo3) REFERENCES cuerpoejer (id_cuerpo);
+
+
+
+ALTER TABLE soldado_servicio ADD id_solda3 INT(10);
+
+ALTER TABLE soldado_servicio add constraint fk_id4 FOREIGN KEY (id_solda3) REFERENCES soldado (id_solda);
+
+ALTER TABLE soldado_servicio add id_servi3 INT(10);
+
+ALTER TABLE soldado_servicio add constraint fk_id5 FOREIGN KEY (id_servi3) REFERENCES servicio (id_servi);
+
+ALTER TABLE compañia_cuarteles add id_compa4 INT(10);
+
+ALTER TABLE compañia_cuarteles add constraint fk_id6 FOREIGN KEY (id_compa4) REFERENCES compañia (id_compa);        
+
+ALTER TABLE compañia_cuarteles add id_cuartel4 INT(10);
+
+ALTER TABLE compañia_cuarteles add constraint fk_id7 FOREIGN KEY (id_cuartel4) REFERENCES cuarteles (id_cuartel)
+
+
+
+ALTER TABLE cuerpoejer_compañia add id_cuerpo5 INT(10);
+
+ALTER TABLE cuerpoejer_compañia add constraint fk_id8 FOREIGN KEY (id_cuerpo5) REFERENCES cuerpoejer (id_cuerpo);
+
+ALTER TABLE cuerpoejer_compañia add id_compa5 INT(10);
+
+ALTER TABLE cuerpoejer_compañia add constraint fk_id9 FOREIGN KEY (id_compa5) REFERENCES compañia (id_compa);
+
+
+
+
+
+
+
